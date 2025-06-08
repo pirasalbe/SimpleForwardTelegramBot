@@ -1,12 +1,8 @@
 {
-  "name": "telegram-bot_node",
+  "name": "simple-forward-telegram-bot",
   "version": "1.0.0",
-  "description": "Telegram Bot with TypeScript, Node.js, and Telegraf and deployment configuration for Heroku",
+  "description": "Telegram Bot",
   "main": "dist/app.js",
-  "engines": {
-    "node": "17.0",
-    "npm": "8.1"
-  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/app.js",
@@ -30,6 +26,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "date-fns": "^4.1.0",
     "prebuilt-tdlib": "^0.1008049.0",
     "tdl": "^8.0.2"
   }

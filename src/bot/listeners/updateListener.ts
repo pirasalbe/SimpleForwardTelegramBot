@@ -1,5 +1,6 @@
 import { Client } from 'tdl';
 import { Update, updateNewMessage } from 'tdlib-types';
+import { debug } from '../helper';
 import { messageListener } from './messageListener';
 
 const LISTENERS: Record<string, (update: Update, client: Client) => void> = {
@@ -8,7 +9,7 @@ const LISTENERS: Record<string, (update: Update, client: Client) => void> = {
 };
 
 const defaultHandler = (update: Update) => {
-  // console.log('Received update', update._);
+  debug('Received update', update._, JSON.stringify(update));
 };
 
 export const updateListener = (update: Update, client: Client): void => {

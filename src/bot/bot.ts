@@ -12,7 +12,7 @@ export class UserBot {
     configure({ tdjson: getTdjson() });
 
     // create client
-    this.client = createClient({ apiId: Number(API_ID), apiHash: API_HASH });
+    this.client = createClient({ apiId: API_ID, apiHash: API_HASH });
 
     // configure client
     this.client.on('error', (update) => console.error(update));

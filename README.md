@@ -10,28 +10,23 @@ npm run build
 
 ## Run the project
 
-Start script
+Define the following env variables before running the project.
+
+- `API_ID`: application ID obtained from Telegram
+- `API_HASH`: application hash obtained from Telegram
+- `CHAT_ID`: chat to monitor
+- `PHOTO_DESTINATION_CHAT_ID`: destination for photos
+- `PHOTO_DESTINATION_THREAD_NAME`: thread in the destination
+- `DOCUMENT_DESTINATION_CHAT_ID`: destination for documents
+- `DOCUMENT_DESTINATION_THREAD_NAME`: thread in the destination
+- `VIDEO_MESSAGE_CHAT_ID`: destination for video messages
+- `VIDEO_MESSAGE_THREAD_NAME`: thread in the destination
+- `DEBUG`: pass '1' to see all message
+
+&nbsp;
+
+Start the bot
 
 ```
 npm start
 ```
-
-&nbsp;
-
-Define _token_ and run the project
-
-```
-BOT_TOKEN="110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw" npm start
-```
-
-_Replace the token in the command, which is **invalid**, with your own._
-
-&nbsp;
-
-Define _token_ and _chat id_ and run the project
-
-```
-BOT_TOKEN="110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw" CHAT_ID="123456789" npm start
-```
-
-_Replace the chat id in the command, which is **invalid**, with your own._

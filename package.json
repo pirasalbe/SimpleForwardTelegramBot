@@ -1,0 +1,33 @@
+{
+  "name": "simple-forward-telegram-bot",
+  "version": "1.0.0",
+  "description": "Telegram Bot",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pirasalbe/Telegram-Bot_Node.js.git"
+  },
+  "author": "pirasalbe",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/pirasalbe/Telegram-Bot_Node.js/issues"
+  },
+  "homepage": "https://github.com/pirasalbe/Telegram-Bot_Node.js#readme",
+  "devDependencies": {
+    "@types/node": "^16.11.4",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "eslint": "^8.1.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "prebuilt-tdlib": "^0.1008049.0",
+    "tdl": "^8.0.2"
+  }
+}

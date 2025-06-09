@@ -14,6 +14,7 @@ Define the following env variables before running the project.
 
 - `API_ID`: application ID obtained from Telegram
 - `API_HASH`: application hash obtained from Telegram
+- `TDJSON_PATH`: path to `libtdjson` (`tdjson.dll` on Windows, `libtdjson.dylib` on macOS, or `libtdjson.so`). It will use the prebuilt one otherwise.
 - `CHAT_ID`: chat to monitor
 - `PHOTO_DESTINATION_CHAT_ID`: destination for photos
 - `PHOTO_DESTINATION_THREAD_NAME`: thread in the destination

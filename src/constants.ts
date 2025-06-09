@@ -1,6 +1,8 @@
 export const API_ID = Number(process.env.API_ID);
 export const API_HASH = String(process.env.API_HASH);
 
+export const TDJSON_PATH = process.env.TDJSON_PATH;
+
 export const DEBUG = process.env.DEBUG === '1';
 
 export const CHAT_ID = Number(process.env.CHAT_ID);

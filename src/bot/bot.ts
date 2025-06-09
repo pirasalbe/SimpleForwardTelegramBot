@@ -1,6 +1,6 @@
 import { getTdjson } from 'prebuilt-tdlib';
 import { Client, configure, createClient } from 'tdl';
-import { API_HASH, API_ID } from '../constants';
+import { API_HASH, API_ID, TDJSON_PATH } from '../constants';
 import { updateListener } from './listeners/updateListener';
 
 export class UserBot {
@@ -9,7 +9,7 @@ export class UserBot {
 
   constructor() {
     // configure td lib
-    configure({ tdjson: getTdjson() });
+    configure({ tdjson: TDJSON_PATH ?? getTdjson() });
 
     // create client
     this.client = createClient({ apiId: API_ID, apiHash: API_HASH });

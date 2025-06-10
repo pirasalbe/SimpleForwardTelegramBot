@@ -1,7 +1,5 @@
 package com.pirasalbe.configurations;
 
-import java.util.List;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,44 +7,42 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "bot")
 public class TelegramConfiguration {
 
-	private String username;
+	// Phone number
+	private String phoneNumber;
 
-	private String token;
-
-	private String number;
-
+	// Application ID obtained from Telegram
 	private Integer apiId;
 
+	// Application hash obtained from Telegram
 	private String apiHash;
 
-	private Long backupChat;
+	// Chat to monitor
+	private Long chatId;
 
-	private Long logChat;
+	// Destination for photos
+	private Long photoDestinationChatId;
 
-	private List<String> requestGenerators;
+	// Thread name in the photo destination chat
+	private String photoDestinationThreadName;
 
-	public String getUsername() {
-		return username;
+	// Destination for documents
+	private Long documentDestinationChatId;
+
+	// Thread name in the document destination chat
+	private String documentDestinationThreadName;
+
+	// Destination for video messages
+	private Long videoMessageDestinationChatId;
+
+	// Thread name in the video message destination chat
+	private String videoMessageDestinationThreadName;
+
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-
-	public String getToken() {
-		return token;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public Integer getApiId() {
@@ -65,28 +61,60 @@ public class TelegramConfiguration {
 		this.apiHash = apiHash;
 	}
 
-	public Long getBackupChat() {
-		return backupChat;
+	public Long getChatId() {
+		return chatId;
 	}
 
-	public void setBackupChat(Long backupChat) {
-		this.backupChat = backupChat;
+	public void setChatId(Long chatId) {
+		this.chatId = chatId;
 	}
 
-	public Long getLogChat() {
-		return logChat;
+	public Long getPhotoDestinationChatId() {
+		return photoDestinationChatId;
 	}
 
-	public void setLogChat(Long logChat) {
-		this.logChat = logChat;
+	public void setPhotoDestinationChatId(Long photoDestinationChatId) {
+		this.photoDestinationChatId = photoDestinationChatId;
 	}
 
-	public List<String> getRequestGenerators() {
-		return requestGenerators;
+	public String getPhotoDestinationThreadName() {
+		return photoDestinationThreadName;
 	}
 
-	public void setRequestGenerators(List<String> requestGenerators) {
-		this.requestGenerators = requestGenerators;
+	public void setPhotoDestinationThreadName(String photoDestinationThreadName) {
+		this.photoDestinationThreadName = photoDestinationThreadName;
+	}
+
+	public Long getDocumentDestinationChatId() {
+		return documentDestinationChatId;
+	}
+
+	public void setDocumentDestinationChatId(Long documentDestinationChatId) {
+		this.documentDestinationChatId = documentDestinationChatId;
+	}
+
+	public String getDocumentDestinationThreadName() {
+		return documentDestinationThreadName;
+	}
+
+	public void setDocumentDestinationThreadName(String documentDestinationThreadName) {
+		this.documentDestinationThreadName = documentDestinationThreadName;
+	}
+
+	public Long getVideoMessageDestinationChatId() {
+		return videoMessageDestinationChatId;
+	}
+
+	public void setVideoMessageDestinationChatId(Long videoMessageDestinationChatId) {
+		this.videoMessageDestinationChatId = videoMessageDestinationChatId;
+	}
+
+	public String getVideoMessageDestinationThreadName() {
+		return videoMessageDestinationThreadName;
+	}
+
+	public void setVideoMessageDestinationThreadName(String videoMessageDestinationThreadName) {
+		this.videoMessageDestinationThreadName = videoMessageDestinationThreadName;
 	}
 
 }

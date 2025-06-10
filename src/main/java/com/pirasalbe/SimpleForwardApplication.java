@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-public class RequestManagerApplication {
+public class SimpleForwardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RequestManagerApplication.class, args);
+		SpringApplication.run(SimpleForwardApplication.class, args);
 	}
 
 }

@@ -2,27 +2,26 @@ package com.pirasalbe.services.telegram;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.pirasalbe.configurations.TelegramConfiguration;
-import com.pirasalbe.models.exceptions.UserBotException;
+import com.pirasalbe.services.telegram.listeners.MessageListener;
 
 import it.tdlight.Init;
 import it.tdlight.client.APIToken;
 import it.tdlight.client.AuthenticationSupplier;
-import it.tdlight.client.Result;
 import it.tdlight.client.SimpleAuthenticationSupplier;
 import it.tdlight.client.SimpleTelegramClient;
 import it.tdlight.client.SimpleTelegramClientBuilder;
 import it.tdlight.client.SimpleTelegramClientFactory;
 import it.tdlight.client.TDLibSettings;
-import it.tdlight.jni.TdApi;
+import it.tdlight.jni.TdApi.UpdateNewMessage;
 import it.tdlight.util.UnsupportedNativeLibraryException;
 
 /**
@@ -34,10 +33,15 @@ import it.tdlight.util.UnsupportedNativeLibraryException;
 @Component
 public class TelegramUserBotService implements AutoCloseable {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(TelegramUserBotService.class);
+
 	private static final String USERBOT_PATH = "userbot-data";
 
 	private static SimpleTelegramClientFactory clientFactory;
 	private static SimpleTelegramClient client;
+
+	@Autowired
+	private MessageListener messageListener;
 
 	public TelegramUserBotService(TelegramConfiguration configuration)
 			throws InterruptedException, UnsupportedNativeLibraryException {
@@ -61,11 +65,18 @@ public class TelegramUserBotService implements AutoCloseable {
 		SimpleTelegramClientBuilder clientBuilder = clientFactory.builder(settings);
 
 		// Configure the authentication info
-		SimpleAuthenticationSupplier<?> authenticationData = AuthenticationSupplier.user(configuration.getNumber());
+		SimpleAuthenticationSupplier<?> authenticationData = AuthenticationSupplier
+				.user(configuration.getPhoneNumber());
 
-		ExecutorService executorService = Executors.newSingleThreadExecutor();
+		ExecutorService executorService = Executors.newFixedThreadPool(10);
+
+		// Add an update handler that prints every received message
+		clientBuilder.addUpdateHandler(UpdateNewMessage.class,
+				(message) -> executorService.execute(() -> wrapHandler(() -> messageListener.accept(client, message))));
+
 		executorService.execute(() -> {
 			client = clientBuilder.build(authenticationData);
+			LOGGER.info("User bot initialized");
 		});
 	}
 
@@ -75,33 +86,11 @@ public class TelegramUserBotService implements AutoCloseable {
 		clientFactory.close();
 	}
 
-	/**
-	 * Execute method async
-	 *
-	 * @param <R>      Result type
-	 * @param function Method to execute
-	 * @return Future
-	 */
-	public <R extends TdApi.Object> Future<Result<R>> sendAsync(TdApi.Function<R> function) {
-		CompletableFuture<Result<R>> completableFuture = new CompletableFuture<>();
-
-		client.send(function, completableFuture::complete);
-
-		return completableFuture;
-	}
-
-	/**
-	 * Execute method sync
-	 *
-	 * @param <R>      Result type
-	 * @param function Method to execute
-	 * @return Result of R
-	 */
-	public <R extends TdApi.Object> Result<R> sendSync(TdApi.Function<R> function) {
+	private void wrapHandler(Runnable method) {
 		try {
-			return sendAsync(function).get();
-		} catch (InterruptedException | ExecutionException e) {
-			throw new UserBotException(e);
+			method.run();
+		} catch (Exception e) {
+			LOGGER.error("Unexpected error", e);
 		}
 	}
 

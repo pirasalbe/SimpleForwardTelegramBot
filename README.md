@@ -1,33 +1,47 @@
 # SimpleForwardTelegramBot
 
-Telegram Bot to forward messages based on my needs.
+Telegram bot to manage requests.
 
-## Build the project with TypeScript
+# Instructions
 
-```
-npm run build
-```
+## Build
 
-## Run the project
-
-Define the following env variables before running the project.
-
-- `API_ID`: application ID obtained from Telegram
-- `API_HASH`: application hash obtained from Telegram
-- `TDJSON_PATH`: path to `libtdjson` (`tdjson.dll` on Windows, `libtdjson.dylib` on macOS, or `libtdjson.so`). It will use the prebuilt one otherwise.
-- `CHAT_ID`: chat to monitor
-- `PHOTO_DESTINATION_CHAT_ID`: destination for photos
-- `PHOTO_DESTINATION_THREAD_NAME`: thread in the destination
-- `DOCUMENT_DESTINATION_CHAT_ID`: destination for documents
-- `DOCUMENT_DESTINATION_THREAD_NAME`: thread in the destination
-- `VIDEO_MESSAGE_CHAT_ID`: destination for video messages
-- `VIDEO_MESSAGE_THREAD_NAME`: thread in the destination
-- `DEBUG`: pass '1' to see all message
-
-&nbsp;
-
-Start the bot
+The following command will create an executable jar.
 
 ```
-npm start
+./gradlew bootJar
 ```
+
+Use the following to generate a Raspberry executable jar.
+
+```
+./gradlew -Ppi bootJar
+```
+
+### Build and Run
+
+The following command runs build the project and runs it.
+
+```
+./gradlew bootRun
+```
+
+## Check health
+
+```
+curl localhost:8080/actuator/health
+```
+
+### Variables
+
+- `bot.api-id`: application ID obtained from Telegram
+- `bot.api-hash`: application hash obtained from Telegram
+- `bot.tdjson-path`: path to `libtdjson` (`tdjson.dll` on Windows, `libtdjson.dylib` on macOS, or `libtdjson.so`). It will use the prebuilt one otherwise.
+- `bot.chat-id`: chat to monitor
+- `bot.photo-destination-chat-id`: destination for photos
+- `bot.photo-destination-thread-name`: thread in the destination
+- `bot.document-destination-chat-id`: destination for documents
+- `bot.document-destination-thread-name`: thread in the destination
+- `bot.video-message-chat-id`: destination for video messages
+- `bot.video-message-thread-name`: thread in the destination
+- `generic.debug`: pass '1' to see all message
